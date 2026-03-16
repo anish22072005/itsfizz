@@ -97,10 +97,10 @@ npm run deploy
 ### Deploy to Vercel (Recommended)
 
 1. Push to GitHub
-2. Go to [vercel.com](https://netlify.com)
+2. Go to [netlify.com](https://netlify.com)
 3. Click "New Project" and import your repository
 4. Vercel will automatically detect Next.js and configure the build
-5. Your site will be live at `your-project.vercel.app`
+5. Your site will be live at `your-project.netlify.app`
 
 ## 📁 Project Structure
 
