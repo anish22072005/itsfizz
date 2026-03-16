@@ -174,26 +174,26 @@ export default function ContentSection() {
       </section>
 
        {/* CTA Section */}
-      <section ref={ctaRef} className="w-full py-36 md:py-48 px-6 md:px-10 bg-black">
-         <div className="max-w-3xl mx-auto text-center">
+      <section ref={ctaRef} className="w-full py-36 md:py-48 px-6 md:px-10 bg-black flex justify-center">
+         <div className="w-full max-w-4xl mx-auto text-center flex flex-col items-center">
           <h2 className="text-4xl md:text-6xl font-black text-white mb-10 leading-tight">
-             Ready for <br />
-             <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+             <span className="block">Ready for</span>
+             <span className="block mt-2 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                Something Great?
              </span>
            </h2>
 
-          <p className="text-lg md:text-xl text-slate-300 mb-12 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-300 mb-12 leading-relaxed">
              Transform your vision into reality with cutting-edge solutions
            </p>
 
-          <button className="group px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 mb-16 md:mb-20">
+          <button className="group mx-auto px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 mb-16 md:mb-20">
              Get Started
              <span className="ml-3 group-hover:translate-x-2 transition-transform inline-block">→</span>
            </button>
 
            {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 pt-14 md:pt-16 border-t border-slate-800">
+          <div className="w-full max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 pt-14 md:pt-16 border-t border-slate-800">
              <div className="group">
               <div className="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-3 group-hover:from-blue-400 group-hover:to-purple-400 transition-all">
                  500+
