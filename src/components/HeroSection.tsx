@@ -14,6 +14,7 @@ interface Stat {
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
+  const brandRef = useRef<HTMLSpanElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const visualRef = useRef<HTMLDivElement>(null);
 
@@ -24,94 +25,147 @@ export default function HeroSection() {
   ];
 
   useEffect(() => {
-    if (!headlineRef.current || !statsRef.current || !visualRef.current) return;
+    if (!heroRef.current || !headlineRef.current || !brandRef.current || !statsRef.current || !visualRef.current) return;
 
-    // Initial load animations
-    const timeline = gsap.timeline();
+    const heroEl = heroRef.current;
+    const headlineEl = headlineRef.current;
+    const brandEl = brandRef.current;
+    const statsEl = statsRef.current;
+    const visualEl = visualRef.current;
 
-    // Animate headline letters
-    const headline = headlineRef.current;
-    const letters = headline.querySelectorAll('.letter');
-    
-    timeline.fromTo(
-      letters,
-      {
-        opacity: 0,
-        y: 20,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: 'power2.out',
-      },
-      0
-    );
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline();
+      const letters = headlineEl.querySelectorAll('.letter');
+      const statItems = statsEl.querySelectorAll('.stat-item');
+      const brandLetters = brandEl.querySelectorAll('.brand-letter');
 
-    // Animate stats
-    timeline.fromTo(
-      statsRef.current.querySelectorAll('.stat-item'),
-      {
-        opacity: 0,
-        x: -20,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: 'power2.out',
-      },
-      0.3
-    );
+      // Cinematic letter reveal for WELCOME
+      timeline.fromTo(
+        letters,
+        {
+          opacity: 0,
+          y: 36,
+          rotateX: -70,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.72,
+          stagger: 0.07,
+          ease: 'expo.out',
+        },
+        0
+      );
 
-    // Animate visual element
-    timeline.fromTo(
-      visualRef.current,
-      {
-        opacity: 0,
-        scale: 0.95,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-      },
-      0.1
-    );
+      // Unique wave reveal for grouped ITSFIZZ word
+      timeline.fromTo(
+        brandLetters,
+        {
+          opacity: 0,
+          y: 34,
+          scale: 0.88,
+          rotateZ: -6,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotateZ: 0,
+          duration: 0.7,
+          stagger: 0.045,
+          ease: 'back.out(1.8)',
+        },
+        0.25
+      );
 
-    // Scroll-driven animation for visual element
-    gsap.to(visualRef.current, {
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-        markers: false,
-      },
-      y: -100,
-      opacity: 0.3,
-      ease: 'none',
-    });
+      timeline.fromTo(
+        statItems,
+        {
+          opacity: 0,
+          y: 28,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.65,
+          stagger: 0.12,
+          ease: 'power2.out',
+        },
+        0.45
+      );
 
-    // Parallax effect for headline
-    gsap.to(headlineRef.current, {
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-      },
-      y: 50,
-      opacity: 0,
-      ease: 'none',
-    });
+      timeline.fromTo(
+        visualEl,
+        {
+          opacity: 0,
+          scale: 0.7,
+          rotate: -12,
+        },
+        {
+          opacity: 0.7,
+          scale: 1,
+          rotate: 0,
+          duration: 1.1,
+          ease: 'power3.out',
+        },
+        0.1
+      );
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+      // Gentle breathing pulse for the brand line
+      gsap.to(brandLetters, {
+        yPercent: -4,
+        duration: 2.2,
+        ease: 'sine.inOut',
+        stagger: {
+          each: 0.04,
+          from: 'center',
+          yoyo: true,
+          repeat: -1,
+        },
+      });
+
+      // Continuous floating motion for unique hero feel
+      gsap.to(visualEl, {
+        yPercent: -6,
+        rotation: 6,
+        duration: 4.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
+      // Scroll-driven orbital fade for main visual
+      gsap.to(visualEl, {
+        scrollTrigger: {
+          trigger: heroEl,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2,
+        },
+        y: -160,
+        rotate: 40,
+        scale: 0.82,
+        opacity: 0.15,
+        ease: 'none',
+      });
+
+      gsap.to(headlineEl, {
+        scrollTrigger: {
+          trigger: heroEl,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+        y: 52,
+        opacity: 0.2,
+        ease: 'none',
+      });
+    }, heroEl);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -127,30 +181,41 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-4">
-        {/* Visual Element - Floating box */}
+        {/* Visual Element - Centered halo object */}
         <div
           ref={visualRef}
-          className="absolute top-20 right-4 md:right-20 w-40 h-40 md:w-64 md:h-64 rounded-3xl bg-gradient-to-br from-purple-400 to-blue-500 shadow-2xl"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-purple-400/70 via-blue-400/60 to-cyan-300/50 shadow-2xl"
           style={{
             backdropFilter: 'blur(10px)',
           }}
         >
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-4xl md:text-6xl font-bold text-white/80">↗</div>
+          <div className="w-full h-full flex items-center justify-center relative">
+            <div className="absolute inset-6 rounded-full border border-white/30"></div>
+            <div className="absolute inset-12 rounded-full border border-white/20"></div>
+            <div className="text-3xl md:text-5xl font-bold text-white/75">✦</div>
           </div>
         </div>
 
         {/* Headline */}
-        <div ref={headlineRef} className="text-center mb-12 md:mb-20 max-w-4xl">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-wider text-white mb-4 leading-none">
-            {Array.from('WELCOME ITSFIZZ').map((letter, index) => (
-              <span
-                key={index}
-                className={`letter inline-block ${letter === ' ' ? 'w-2 md:w-4' : ''}`}
-              >
-                {letter}
-              </span>
-            ))}
+        <div ref={headlineRef} className="relative text-center mb-10 md:mb-16 max-w-5xl z-20">
+          <h1 className="text-white mb-4 leading-none">
+            <span className="flex items-center justify-center gap-2 md:gap-4 text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.05em] md:tracking-[0.1em] whitespace-nowrap">
+              {Array.from('WELCOME').map((letter, index) => (
+                <span key={index} className="letter inline-block">
+                  {letter}
+                </span>
+              ))}
+            </span>
+            <span
+              ref={brandRef}
+              className="block mt-2 md:mt-3 text-5xl md:text-7xl lg:text-8xl font-black tracking-[0.02em] md:tracking-[0.03em] whitespace-nowrap"
+            >
+              {Array.from('ITSFIZZ').map((letter, index) => (
+                <span key={index} className="brand-letter inline-block">
+                  {letter}
+                </span>
+              ))}
+            </span>
           </h1>
           <p className="text-lg md:text-xl text-purple-200 mt-6 font-light tracking-wide">
             Crafting Digital Excellence Through Innovation
@@ -160,7 +225,7 @@ export default function HeroSection() {
         {/* Statistics */}
         <div
           ref={statsRef}
-          className="grid grid-cols-3 gap-4 md:gap-12 mt-16 md:mt-24 w-full max-w-2xl px-4"
+          className="relative z-20 grid grid-cols-3 gap-4 md:gap-10 mt-10 md:mt-14 w-full max-w-2xl px-4"
         >
           {stats.map((stat, index) => (
             <div
