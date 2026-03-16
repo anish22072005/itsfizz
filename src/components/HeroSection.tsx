@@ -200,7 +200,7 @@ export default function HeroSection() {
         <div ref={headlineRef} className="relative text-center mb-10 md:mb-16 max-w-5xl z-20">
           <h1 className="text-white mb-4 leading-none">
             <span className="flex items-center justify-center gap-2 md:gap-4 text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.05em] md:tracking-[0.1em] whitespace-nowrap">
-              {Array.from('WELCOME').map((letter, index) => (
+              {Array.from('WELCOME TO').map((letter, index) => (
                 <span key={index} className="letter inline-block">
                   {letter}
                 </span>
