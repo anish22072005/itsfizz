@@ -124,9 +124,9 @@ export default function ContentSection() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="feature-card group max-w-xs"
+                className="feature-card group max-w-xs transition-transform duration-500 ease-out hover:-translate-y-1"
               >
-                <div className="text-6xl md:text-7xl mb-8 group-hover:scale-110 transition-transform duration-500">
+                <div className="text-6xl md:text-7xl mb-8 group-hover:scale-110 transition-transform duration-700 ease-out">
                    {feature.icon}
                  </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">
@@ -135,7 +135,7 @@ export default function ContentSection() {
                 <p className="text-base text-slate-300 leading-relaxed mb-7">
                    {feature.description}
                  </p>
-                <div className="h-1 w-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full group-hover:w-16 transition-all duration-500 mx-auto"></div>
+                <div className="h-1 w-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full group-hover:w-16 transition-all duration-700 ease-out mx-auto"></div>
               </div>
             ))}
           </div>
@@ -154,19 +154,19 @@ export default function ContentSection() {
              </div>
 
            {/* Projects */}
-          <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 justify-items-center text-center">
+          <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 justify-items-center text-center max-w-4xl mx-auto">
             {projects.map((project, index) => (
-               <div key={index} className="project-card group max-w-sm">
-                <div className="text-6xl md:text-7xl mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
+               <div key={index} className="project-card group max-w-sm transition-transform duration-500 ease-out hover:-translate-y-1">
+                <div className="text-6xl md:text-7xl mb-8 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 ease-out">
                    {project.icon}
                  </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-blue-400 group-hover:bg-clip-text transition-all duration-300">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-blue-400 group-hover:bg-clip-text transition-all duration-500 ease-out">
                    {project.title}
                  </h3>
-                <p className="text-slate-400 group-hover:text-slate-200 transition-colors text-base md:text-lg mb-7">
+                <p className="text-slate-400 group-hover:text-slate-200 transition-colors duration-500 ease-out text-base md:text-lg mb-7">
                    {project.description}
                  </p>
-                <div className="h-1 w-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full group-hover:w-16 transition-all duration-500 mx-auto"></div>
+                <div className="h-1 w-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full group-hover:w-16 transition-all duration-700 ease-out mx-auto"></div>
               </div>
             ))}
           </div>
