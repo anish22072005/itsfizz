@@ -30,7 +30,7 @@ A beautiful, modern, and performant scroll-driven hero section animation built w
 - **TypeScript** - Type safety
 - **Tailwind CSS 4** - Utility-first CSS framework
 - **GSAP 3** - Professional animation library with ScrollTrigger plugin
-- **Vercel** - Deployment platform
+- **Netlify** - Deployment platform
 
 ## 📦 Installation
 
@@ -97,7 +97,7 @@ npm run deploy
 ### Deploy to Vercel (Recommended)
 
 1. Push to GitHub
-2. Go to [vercel.com](https://vercel.com)
+2. Go to [vercel.com](https://netlify.com)
 3. Click "New Project" and import your repository
 4. Vercel will automatically detect Next.js and configure the build
 5. Your site will be live at `your-project.vercel.app`
